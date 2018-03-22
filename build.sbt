@@ -34,6 +34,11 @@ lazy val scala212 = "2.12.4"
 lazy val scalaSettings = Seq(
   scalaVersion := scala212,
   crossScalaVersions := Seq(scala210, scala211, scala212),
+  libraryDependencies ++= Seq(
+    "org.scalatest" %% "scalatest" % "3.0.5",
+    "org.scalactic" %% "scalactic" % "3.0.5",
+    "org.scalacheck" %% "scalacheck" % "1.13.5"
+  ).map(_ % Test),
   scalacOptions ++= Seq(
     "-deprecation",
     "-encoding",
