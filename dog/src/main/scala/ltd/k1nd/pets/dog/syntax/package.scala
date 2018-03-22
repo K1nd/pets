@@ -1,3 +1,3 @@
-package com.ovoenergy.api.payg
+package ltd.k1nd.pets.dog
 
-package object syntax extends ContainerOps with BooleanOps with FutureValidationOps
+package object syntax extends ContainerOps with BooleanOps with FutureOps with LiftOps with OptionOps

@@ -1,5 +1,3 @@
 package ltd.k1nd.pets.bones
 
-package object syntax {
-
-}
+package object syntax extends SetOps
