@@ -1,8 +1,8 @@
 package ltd.k1nd.pets.dog.syntax
 
-import cats.Functor
 import cats.arrow.FunctionK
 import cats.data.EitherT
+import cats.Functor
 import ltd.k1nd.pets.dog.syntax.ContainerOps.ContainerSyntax
 
 trait ContainerOps {
