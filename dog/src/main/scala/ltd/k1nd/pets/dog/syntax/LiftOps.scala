@@ -1,7 +1,7 @@
 package ltd.k1nd.pets.dog.syntax
 
-import cats.Functor
 import cats.data.{EitherT, OptionT}
+import cats.Functor
 import ltd.k1nd.pets.dog.syntax.LiftOps.LiftSyntax
 
 trait LiftOps {

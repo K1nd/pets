@@ -12,7 +12,6 @@ trait FutureOps {
 }
 
 object FutureOps {
-  //TODO: We need the Future instance to come in by name to prevent eager evaluation - consider using macros/machinist to avoid runtime wrapper
   implicit final class FutureSyntax[L, R](futVal: => Future[R]) {
     def toIO: IO[R] =
       IO.fromFuture(IO(futVal))
