@@ -69,3 +69,5 @@ lazy val scalaSettings = Seq(
                                               "-Ywarn-unused-import"),
   scalacOptions in (Test, console) := (scalacOptions in (Compile, console)).value
 )
+
+compile in Compile := (compile in Compile).dependsOn(dependencyUpdates).value
