@@ -8,6 +8,7 @@ scalaVersion in ThisBuild := "2.12.4"
 
 lazy val pets = (project in file("."))
   .aggregate(bones, dog)
+  .dependsOn(bones, dog)
   .settings(
     name := "pets",
     scalaSettings

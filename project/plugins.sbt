@@ -15,3 +15,5 @@ addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.5.1")
 addSbtPlugin("com.codacy" % "sbt-codacy-coverage" % "1.3.12")
 
 addSbtPlugin("org.lyranthe.sbt" % "partial-unification" % "1.1.0")
+
+addSbtPlugin("org.tpolecat" % "tut-plugin" % "0.6.4")
