@@ -10,7 +10,7 @@ trait LiftOps {
 }
 
 object LiftOps {
-  implicit class LiftSyntax[F[_], T](val toLift: F[T]) extends AnyVal {
+  implicit final class LiftSyntax[F[_], T](val toLift: F[T]) extends AnyVal {
     def liftEitherT[L](implicit m: Functor[F]): EitherT[F, L, T] =
       EitherT.liftF(toLift)
     def liftIntoOptionT(implicit f: Functor[F]): OptionT[F, T] =
