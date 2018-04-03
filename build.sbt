@@ -44,7 +44,8 @@ lazy val scalaSettings = Seq(
   libraryDependencies ++= Seq(
     "org.scalatest" %% "scalatest" % "3.0.5",
     "org.scalactic" %% "scalactic" % "3.0.5",
-    "org.scalacheck" %% "scalacheck" % "1.13.5"
+    "org.scalacheck" %% "scalacheck" % "1.13.5",
+    "org.scalamock" %% "scalamock" % "4.1.0"
   ).map(_ % Test),
   scalacOptions ++= Seq(
     "-deprecation",
