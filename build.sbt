@@ -24,12 +24,19 @@ lazy val dog = project.settings(
   libraryDependencies ++= Seq(
     "org.typelevel" %% "cats-core" % "1.0.1",
     "org.typelevel" %% "cats-effect" % "0.10"
-  )
+  ),
+  addCompilerPlugin("org.spire-math" % "kind-projector" % "0.9.6" cross CrossVersion.binary),
+  libraryDependencies ++= (scalaBinaryVersion.value match {
+    case "2.10" =>
+      compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full) :: Nil
+    case _ =>
+      Nil
+  })
 )
 
 lazy val scala210 = "2.10.7"
 lazy val scala211 = "2.11.12"
-lazy val scala212 = "2.12.4"
+lazy val scala212 = "2.12.5"
 
 lazy val scalaSettings = Seq(
   scalaVersion := scala212,
