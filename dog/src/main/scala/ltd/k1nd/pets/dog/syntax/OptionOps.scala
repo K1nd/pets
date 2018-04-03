@@ -10,7 +10,7 @@ trait OptionOps {
 }
 
 object OptionOps {
-  implicit class OptionSyntax[T](val opt: Option[T]) extends AnyVal {
+  implicit final class OptionSyntax[T](val opt: Option[T]) extends AnyVal {
     def toOptionT[F[_]: Applicative] = OptionT.fromOption[F](opt)
   }
 }
