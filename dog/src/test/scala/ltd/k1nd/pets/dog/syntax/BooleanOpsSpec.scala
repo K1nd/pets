@@ -1,38 +1,58 @@
 package ltd.k1nd.pets.dog.syntax
 
 import cats.implicits.catsStdInstancesForEither
-import org.scalatest.{EitherValues, FlatSpec, Matchers}
+import org.scalatest.{EitherValues, Matchers, WordSpec}
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
-import scala.util.Either
 
 class BooleanOpsSpec
-    extends FlatSpec
+    extends WordSpec
     with GeneratorDrivenPropertyChecks
     with Matchers
     with EitherValues {
 
-  "toApplicativeError" should "successfully infer its type arguments" in {
-    forAll { bool: Boolean =>
-      "val x: Either[Int, Unit] = bool.toApplicativeError(1337)" should compile
+  "toApplicativeError" should {
+    "successfully infer its type arguments" in {
+      forAll { bool: Boolean =>
+        "val x: Either[Int, Unit] = bool.toApplicativeError(1337)" should compile
+      }
+    }
+
+    "turn into an context with an error on false and take the other value by name" in {
+      val bool = false
+
+      val result = bool.toApplicativeError(1337, fail())
+
+      result.left.value should equal(1337)
+    }
+
+    "turn into a success on right and take the other value by name" in {
+      val bool = true
+
+      val successValue = "Great success!!"
+
+      val result = bool.toApplicativeError(fail(), successValue)
+
+      result.right.value should equal(successValue)
     }
   }
 
-  it should "turn into an context with an error on false and take the other value by name" in {
-    val bool = false
+  "ifElseThen" should {
+    "run left on false" in {
+      false.ifElseThen((), fail()) should equal(())
+    }
 
-    val result = bool.toApplicativeError(1337, fail())
-
-    result.left.value should equal(1337)
+    "run right on true" in {
+      true.ifElseThen(fail(), ()) should equal(())
+    }
   }
 
-  it should "turn into a success on right and take the other value by name" in {
-    val bool = true
+  "toEither" should {
+    "turn into a left on false" in {
+      false.toEither((), ()).left.value should be(())
+    }
 
-    val successValue = "Great success!!"
-
-    val result = bool.toApplicativeError(fail(), successValue)
-
-    result.right.value should equal(successValue)
+    "turn into a right on true" in {
+      true.toEither((), ()).right.value should be(())
+    }
   }
-
 }
