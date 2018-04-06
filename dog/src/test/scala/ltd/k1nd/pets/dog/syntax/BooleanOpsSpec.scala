@@ -1,8 +1,8 @@
 package ltd.k1nd.pets.dog.syntax
 
 import cats.implicits.catsStdInstancesForEither
-import org.scalatest.{EitherValues, Matchers, WordSpec}
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
+import org.scalatest.{EitherValues, Matchers, WordSpec}
 
 class BooleanOpsSpec
     extends WordSpec
