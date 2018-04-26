@@ -1,6 +1,6 @@
 import ReleaseTransformations._
 
-releaseProcess := Seq[ReleaseStep](
+releaseProcess in ThisBuild := Seq[ReleaseStep](
   checkSnapshotDependencies,              // : ReleaseStep
   inquireVersions,                        // : ReleaseStep
   runClean,                               // : ReleaseStep
@@ -15,18 +15,18 @@ releaseProcess := Seq[ReleaseStep](
 )
 
 // POM settings for Sonatype
-homepage := Some(url("https://github.com/K1nd/pets"))
-scmInfo := Some(ScmInfo(url("https://github.com/K1nd/pets"),
+homepage in ThisBuild := Some(url("https://github.com/K1nd/pets"))
+scmInfo in ThisBuild := Some(ScmInfo(url("https://github.com/K1nd/pets"),
   "git@github.com:K1nd/pets.git"))
-developers := List(Developer("wunderk1nd-e",
+developers in ThisBuild := List(Developer("wunderk1nd-e",
   "wunderk1nd-e",
   "elias@k1nd.ltd",
   url("https://github.com/wunderk1nd-e")))
-licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
-publishMavenStyle := true
+licenses in ThisBuild += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
+publishMavenStyle in ThisBuild := true
 
 // Add sonatype repository settings
-publishTo := Some(
+publishTo in ThisBuild := Some(
   if (isSnapshot.value)
     Opts.resolver.sonatypeSnapshots
   else
