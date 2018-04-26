@@ -4,22 +4,22 @@
 
 Helpers for cats &amp; co.
 
-###Dog
+### Dog
 
-####BooleanOps
-
-
-####ContainerOps
+#### BooleanOps
 
 
-####FutureOps
+#### ContainerOps
 
 
-####LiftOps
+#### FutureOps
 
 
-####OptionOps
-#####toOptionT
+#### LiftOps
+
+
+#### OptionOps
+##### toOptionT
 Transforms an option into an OptionT for some context (Applicative) F[_]
 ```tut:reset
 import ltd.k1nd.pets.dog.syntax.OptionOps._
@@ -30,10 +30,10 @@ None.toOptionT[Id]
 ```
 
 
-###Bones
+### Bones
 
-####SetOps
-#####doesNotContain
+#### SetOps
+##### doesNotContain
 This simply checks for the non-existance of an element in a set.
 ```tut:reset
 import ltd.k1nd.pets.bones.syntax.SetOps._

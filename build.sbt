@@ -2,8 +2,6 @@ organization in ThisBuild := "ltd.k1nd"
 organizationName := "KIND Consulting Ltd."
 organizationHomepage := Some(url("https://k1nd.ltd"))
 
-version in ThisBuild := "0.1"
-
 scalaVersion in ThisBuild := "2.12.4"
 
 lazy val pets = (project in file("."))
