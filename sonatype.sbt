@@ -1,11 +1,11 @@
-sonatypeProfileName := "ltd.k1nd"
+sonatypeProfileName in ThisBuild := "ltd.k1nd"
 
-publishMavenStyle := true
+publishMavenStyle in ThisBuild := true
 
-licenses := Seq("APL2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt"))
+licenses in ThisBuild := Seq("APL2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt"))
 
 import xerial.sbt.Sonatype._
-sonatypeProjectHosting := Some(GitHubHosting("K1nd", "pets", "elias@k1nd.ltd"))
+sonatypeProjectHosting in ThisBuild := Some(GitHubHosting("K1nd", "pets", "elias@k1nd.ltd"))
 
 // or if you want to set these fields manually
 homepage in ThisBuild := Some(url("https://github.com/K1nd/pets"))
