@@ -39,4 +39,4 @@ jobs:
           key: v1-dependencies--{{ checksum "build.sbt" }}
         
       # run tests!
-      - run: sbt coverage test && sbt coverageReport && sbt coverageAggregate && sbt codacyCoverage
+      - run: sbt coverage test && sbt coverageReport && sbt coverageAggregate && sbt codacyCoverage && sbt coveralls
