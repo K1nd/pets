@@ -1,5 +1,6 @@
 import ReleaseTransformations._
 
+releasePublishArtifactsAction in ThisBuild := PgpKeys.publishSigned.value
 releaseCrossBuild in ThisBuild := true // true if you cross-build the project for multiple Scala versions
 releaseProcess in ThisBuild := Seq[ReleaseStep](
   checkSnapshotDependencies,
@@ -9,8 +10,7 @@ releaseProcess in ThisBuild := Seq[ReleaseStep](
   setReleaseVersion,
   commitReleaseVersion,
   tagRelease,
-  // For non cross-build projects, use releaseStepCommand("publishSigned")
-  releaseStepCommandAndRemaining("+publishSigned"),
+  publishArtifacts,
   setNextVersion,
   commitNextVersion,
   releaseStepCommand("sonatypeReleaseAll"),
