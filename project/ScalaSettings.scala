@@ -72,7 +72,5 @@ object ScalaSettings extends AutoPlugin {
         "-Ywarn-unused-import"),
       scalacOptions in(Test, console) := (scalacOptions in(Compile, console)).value
     )
-
-
   }
 }
