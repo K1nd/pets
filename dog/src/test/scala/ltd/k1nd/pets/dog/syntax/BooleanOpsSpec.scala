@@ -55,4 +55,10 @@ class BooleanOpsSpec
       true.toEither((), ()).right.value should be(())
     }
   }
+
+  "whenA" should {
+    "do something" in {
+      pending
+    }
+  }
 }

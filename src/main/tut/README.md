@@ -7,13 +7,61 @@ Helpers for cats &amp; co.
 ### Dog
 
 #### BooleanOps
+##### toApplicativeError
+Converts a boolean into an applicative error, with true corresponding to success and false corresponding to error.
+```tut:reset
+import ltd.k1nd.pets.dog.syntax.BooleanOps._
+import scala.util.Try
+import cats.implicits.catsStdInstancesForTry
 
+val exception: Throwable = new Exception("hey you")
+val notUnit: Try[Unit] = false.toApplicativeError(exception)
+val definitelyMyString: Try[String] = true.toApplicativeError(exception, "onSuccess")
+```
+
+##### ifElseThen
+An extension method on boolean that evaluates to it's first argument if false and the second if true.
+```tut:reset
+import ltd.k1nd.pets.dog.syntax.BooleanOps._
+
+val left = false.ifElseThen("left", "right")
+val right = true.ifElseThen("left", "right")
+```
+
+##### toEither
+An extension method on boolean that evaluates to left if false and right if true.
+```tut:reset
+import ltd.k1nd.pets.dog.syntax.BooleanOps._
+
+val left = false.toEither("left", "right")
+val right = true.toEither("left", "right")
+```
+
+##### whenA
+An extension method on boolean that delegates to whenA - runs the provided effect when true, unit otherwise.
+
+```tut:reset
+import ltd.k1nd.pets.dog.syntax.BooleanOps._
+import cats.Id
+
+def runEffect(): Id[Unit] = println("I'm a side effect!")
+
+val left = false.whenA(runEffect())
+val right = true.whenA(runEffect())
+```
 
 #### ContainerOps
 
 
 #### FutureOps
+##### toIO
+Converts a Future to an IO without starting the Future
+```tut:reset
+import ltd.k1nd.pets.dog.syntax.FutureOps._
+import scala.concurrent.Future
 
+Future.successful(123).toIO
+```
 
 #### LiftOps
 
