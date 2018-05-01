@@ -31,6 +31,16 @@ save_dependency_cache: &save_dependency_cache
       - ~/.sbt
     key: *dependency_cache_key
 
+persist_workspace: &persist_workspace
+  persist_to_workspace:
+    root: .
+    paths:
+      - ./*
+
+load_workspace: &load_workspace
+  attach_workspace:
+    at: .
+
 # ---------------------------------------------------------------------------
 # JOB DEFINITIONS
 # ---------------------------------------------------------------------------
@@ -46,10 +56,12 @@ jobs:
           name: Run tests and push coverage to codacy + coveralls
           command: sbt coverage test && sbt coverageReport && sbt coverageAggregate && sbt codacyCoverage && sbt coveralls
       - *save_dependency_cache
+      - *persist_workspace
 
   release:
     <<: *docker_image
     steps:
+      - *load_workspace
       - checkout
       - *restore_dependency_cache
       - *setup_pgp
