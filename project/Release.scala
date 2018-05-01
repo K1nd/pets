@@ -1,6 +1,6 @@
 import com.typesafe.sbt.SbtPgp.autoImportImpl.PgpKeys
-import sbt.{AutoPlugin, Project}
 import sbt.Keys.{publishTo, version}
+import sbt.{AutoPlugin, Project}
 import sbtrelease.ReleasePlugin.autoImport._
 import sbtrelease.ReleaseStateTransformations._
 import xerial.sbt.Sonatype.autoImport.sonatypePublishTo

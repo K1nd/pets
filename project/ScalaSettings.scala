@@ -14,6 +14,8 @@ object ScalaSettings extends AutoPlugin {
   lazy val scala211 = "2.11.12"
   lazy val scala212 = "2.12.6"
 
+  lazy val scalatestVersion = "3.0.5"
+
   lazy val commonSettings = Seq(
     organization := "ltd.k1nd",
     organizationName := "KIND Consulting Ltd.",
@@ -21,8 +23,8 @@ object ScalaSettings extends AutoPlugin {
     scalaVersion := scala212,
     crossScalaVersions := Seq(scala210, scala211, scala212),
     libraryDependencies ++= Seq(
-      "org.scalatest" %% "scalatest" % "3.0.5",
-      "org.scalactic" %% "scalactic" % "3.0.5",
+      "org.scalatest" %% "scalatest" % scalatestVersion,
+      "org.scalactic" %% "scalactic" % scalatestVersion,
       "org.scalacheck" %% "scalacheck" % "1.14.0",
       "org.scalamock" %% "scalamock" % "4.1.0"
     ).map(_ % Test),

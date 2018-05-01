@@ -2,7 +2,6 @@ package ltd.k1nd.pets.dog.syntax
 
 import cats.effect.IO
 import ltd.k1nd.pets.dog.syntax.FutureOps.FutureSyntax
-
 import scala.concurrent.Future
 
 trait FutureOps {

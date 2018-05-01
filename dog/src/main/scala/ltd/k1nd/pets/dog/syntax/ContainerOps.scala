@@ -1,7 +1,7 @@
 package ltd.k1nd.pets.dog.syntax
 
 import cats.arrow.FunctionK
-import cats.data.EitherT
+import cats.data.{EitherT, OptionT}
 import cats.Functor
 import ltd.k1nd.pets.dog.syntax.ContainerOps.ContainerSyntax
 
@@ -19,5 +19,8 @@ object ContainerOps {
 
     def transform[O[_]](implicit nat: FunctionK[F, O]): O[T] =
       nat(valueInContext)
+
+    def liftOptionT(implicit f: Functor[F]): OptionT[F, T] =
+      OptionT.liftF[F, T](valueInContext)
   }
 }
