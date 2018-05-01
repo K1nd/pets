@@ -30,5 +30,3 @@ jobs:
         
       # run tests!
       - run: sbt coverage test && sbt coverageReport && sbt coverageAggregate && sbt codacyCoverage && sbt coveralls
-  release:
-
