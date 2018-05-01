@@ -20,7 +20,7 @@ object ContainerOps {
     def transform[O[_]](implicit nat: FunctionK[F, O]): O[T] =
       nat(valueInContext)
 
-    def liftIntoOptionT(implicit f: Functor[F]): OptionT[F, T] =
+    def liftOptionT(implicit f: Functor[F]): OptionT[F, T] =
       OptionT.liftF[F, T](valueInContext)
   }
 }

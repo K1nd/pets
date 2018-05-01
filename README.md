@@ -6,6 +6,28 @@ Helpers for cats &amp; co.
 
 ### Dog
 
+#### SyncOps
+##### delay
+Takes a by name value and lifts it into a Sync context.
+```scala
+scala> import ltd.k1nd.pets.dog.syntax.SyncOps._
+import ltd.k1nd.pets.dog.syntax.SyncOps._
+
+scala> import cats.effect.IO
+import cats.effect.IO
+
+scala> val suspended = println("hey friend").delay[IO]
+suspended: cats.effect.IO[Unit] = IO$158863444
+
+scala> suspended.unsafeRunSync()
+hey friend
+```
+
+#### ContainerOps
+##### liftEitherT
+##### liftIntoOptionT
+##### transform
+
 #### BooleanOps
 ##### toApplicativeError
 Converts a boolean into an applicative error, with true corresponding to success and false corresponding to error.
@@ -76,9 +98,6 @@ I'm a side effect!
 right: cats.Id[Unit] = ()
 ```
 
-#### ContainerOps
-
-
 #### FutureOps
 ##### toIO
 Converts a Future to an IO without starting the Future
@@ -90,11 +109,8 @@ scala> import scala.concurrent.Future
 import scala.concurrent.Future
 
 scala> Future.successful(123).toIO
-res0: cats.effect.IO[Int] = IO$620143559
+res0: cats.effect.IO[Int] = IO$1643403756
 ```
-
-#### LiftOps
-
 
 #### OptionOps
 ##### toOptionT

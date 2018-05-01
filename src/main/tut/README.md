@@ -19,6 +19,10 @@ suspended.unsafeRunSync()
 ```
 
 #### ContainerOps
+##### liftEitherT
+##### liftIntoOptionT
+##### transform
+
 #### BooleanOps
 ##### toApplicativeError
 Converts a boolean into an applicative error, with true corresponding to success and false corresponding to error.
