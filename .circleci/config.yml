@@ -71,7 +71,6 @@ jobs:
       - run:
           name: Run sbt release task
           command: sbt "release with-defaults"
-      - *save_dependency_cache
 
 # ---------------------------------------------------------------------------
 # WORKFLOWS
