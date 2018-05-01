@@ -12,7 +12,7 @@ jobs:
     
     steps:
       - checkout
-      - run: mkdir ~/.sbt/gpg
+      - run: mkdir -p ~/.sbt/gpg
       - run: echo $PGP_KEY | base64 --decode --ignore-garbage > ~/.sbt/gpg/secring.asc
       - run: echo $PGP_CREDS | base64 --decode --ignore-garbage > ~/.sbt/pgp.credentials
 
