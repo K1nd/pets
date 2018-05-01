@@ -1,9 +1,9 @@
 package ltd.k1nd.pets.dog.syntax
 
-import java.util.concurrent.atomic.AtomicBoolean
 
 import cats.Id
 import cats.implicits.catsStdInstancesForEither
+import java.util.concurrent.atomic.AtomicBoolean
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.scalatest.{EitherValues, Matchers, WordSpec}
 
@@ -63,13 +63,13 @@ class BooleanOpsSpec
     "only run side effects when true" in {
       val bool = new AtomicBoolean(false)
 
-      def setTrue(): Id[Unit] = bool.set(true)
+      def activate(): Id[Unit] = bool.set(true)
 
-      false.whenA(setTrue())
+      false.whenA(activate())
 
       bool.get() should equal(false)
 
-      true.whenA(setTrue())
+      true.whenA(activate())
 
       bool.get() should equal(true)
     }
