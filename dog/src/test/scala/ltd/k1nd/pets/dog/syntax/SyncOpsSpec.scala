@@ -1,11 +1,11 @@
 package ltd.k1nd.pets.dog.syntax
 
-import java.util.concurrent.atomic.AtomicBoolean
 import cats.effect.IO
+import java.util.concurrent.atomic.AtomicBoolean
 import org.scalatest.{Matchers, WordSpec}
 
 class SyncOpsSpec extends WordSpec with Matchers {
-  "delay" should{
+  "delay" should {
     "suspend evaluation of a by name value" in {
       val bool = new AtomicBoolean(false)
 

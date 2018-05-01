@@ -14,7 +14,7 @@ object ScalaSettings extends AutoPlugin {
   lazy val scala211 = "2.11.12"
   lazy val scala212 = "2.12.6"
 
-  private val scalatestVersion = "3.0.5"
+  lazy val scalatestVersion = "3.0.5"
 
   lazy val commonSettings = Seq(
     organization := "ltd.k1nd",
