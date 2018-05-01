@@ -2,6 +2,9 @@ import ReleaseTransformations._
 
 releasePublishArtifactsAction in ThisBuild := PgpKeys.publishSigned.value
 releaseCrossBuild in ThisBuild := true // true if you cross-build the project for multiple Scala versions
+releaseTagComment in ThisBuild    := s"Releasing ${(version in ThisBuild).value} [ci skip]"
+releaseCommitMessage in ThisBuild := s"Setting version to ${(version in ThisBuild).value} [ci skip]"
+
 releaseProcess in ThisBuild := Seq[ReleaseStep](
   checkSnapshotDependencies,
   inquireVersions,
@@ -17,8 +20,4 @@ releaseProcess in ThisBuild := Seq[ReleaseStep](
   pushChanges
 )
 
-// POM settings for Sonatype
-
-
-// Add sonatype repository settings
 publishTo in ThisBuild := sonatypePublishTo.value

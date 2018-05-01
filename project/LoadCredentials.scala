@@ -1,6 +1,4 @@
 import sbt._
-import sbt.Keys._
-import com.typesafe.sbt.SbtPgp.autoImport._
 
 object LoadCredentials{
   lazy val envVars = System.getenv()
