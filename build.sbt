@@ -7,7 +7,6 @@ scalaVersion in ThisBuild := scala212
 lazy val pets = (project in file("."))
   .aggregate(bones, dog)
   .dependsOn(bones, dog)
-  .withGpgCreds
   .settings(
     name := "pets",
     scalaSettings
@@ -16,7 +15,7 @@ lazy val pets = (project in file("."))
 lazy val bones = project.settings(
   name := "pets-bones",
   scalaSettings
-).withGpgCreds
+)
 
 lazy val dog = project.settings(
   name := "pets-dog",
@@ -33,6 +32,6 @@ lazy val dog = project.settings(
     case _ =>
       Nil
   })
-).withGpgCreds
+)
 
 compile in Compile := (compile in Compile).dependsOn(dependencyUpdates).value

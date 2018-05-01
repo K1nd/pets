@@ -20,6 +20,6 @@ developers in ThisBuild := List(Developer("wunderk1nd-e",
   "elias@k1nd.ltd",
   url("https://github.com/wunderk1nd-e")))
 
-credentials in ThisBuild ++= loadCredentials()
-
-pgpPassphrase in ThisBuild := gpgPassphrase
+useGpg := false
+pgpPassphrase := gpgPassphrase
+credentials ++= sonatypeCredentials
