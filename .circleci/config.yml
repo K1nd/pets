@@ -59,7 +59,7 @@ jobs:
       - *restore_dependency_cache
       - run:
           name: Compile
-          command: sbt ";compile; test:compile"
+          command: sbt ";coverage; compile; test:compile"
       - *save_dependency_cache
       - *persist_workspace
 
