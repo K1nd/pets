@@ -1,5 +1,8 @@
 package ltd.k1nd.pets.dog.syntax
 
+import java.util.concurrent.atomic.AtomicBoolean
+
+import cats.Id
 import cats.implicits.catsStdInstancesForEither
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.scalatest.{EitherValues, Matchers, WordSpec}
@@ -57,8 +60,18 @@ class BooleanOpsSpec
   }
 
   "whenA" should {
-    "do something" in {
-      pending
+    "only run side effects when true" in {
+      val bool = new AtomicBoolean(false)
+
+      def setTrue(): Id[Unit] = bool.set(true)
+
+      false.whenA(setTrue())
+
+      bool.get() should equal(false)
+
+      true.whenA(setTrue())
+
+      bool.get() should equal(true)
     }
   }
 }
