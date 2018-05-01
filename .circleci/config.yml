@@ -52,17 +52,6 @@ jobs:
       - checkout
       - *persist_workspace
 
-  build:
-    <<: *docker_image
-    steps:
-      - *load_workspace
-      - *restore_dependency_cache
-      - run:
-          name: Compile
-          command: sbt ";coverage; compile; test:compile"
-      - *save_dependency_cache
-      - *persist_workspace
-
   test:
     <<: *docker_image
     steps:
@@ -94,12 +83,9 @@ workflows:
           filters:
             branches:
               ignore: master
-      - build:
-          requires:
-            - checkout
       - test:
           requires:
-            - build
+            - checkout
   release:
     jobs:
       - checkout:
