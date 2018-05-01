@@ -54,6 +54,9 @@ jobs:
       - *restore_dependency_cache
       - *setup_pgp
       - run:
+          name: Set up github user
+          command: git config --global user.name "wunderk1nd-e" && git config --global user.email "elias@k1nd.ltd"
+      - run:
           name: Run sbt release task
           command: sbt "release with-defaults"
       - *save_dependency_cache
