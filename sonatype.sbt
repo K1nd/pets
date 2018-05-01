@@ -1,10 +1,12 @@
+import LoadCredentials._
+import xerial.sbt.Sonatype._
+
 sonatypeProfileName in ThisBuild := "ltd.k1nd"
 
 publishMavenStyle in ThisBuild := true
 
 licenses in ThisBuild := Seq("APL2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt"))
 
-import xerial.sbt.Sonatype._
 sonatypeProjectHosting in ThisBuild := Some(GitHubHosting("K1nd", "pets", "elias@k1nd.ltd"))
 
 // or if you want to set these fields manually
@@ -17,3 +19,7 @@ developers in ThisBuild := List(Developer("wunderk1nd-e",
   "wunderk1nd-e",
   "elias@k1nd.ltd",
   url("https://github.com/wunderk1nd-e")))
+
+useGpg := false
+pgpPassphrase := gpgPassphrase
+credentials ++= sonatypeCredentials

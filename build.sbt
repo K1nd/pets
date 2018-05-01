@@ -1,8 +1,8 @@
 organization in ThisBuild := "ltd.k1nd"
-organizationName := "KIND Consulting Ltd."
-organizationHomepage := Some(url("https://k1nd.ltd"))
+organizationName in ThisBuild := "KIND Consulting Ltd."
+organizationHomepage in ThisBuild := Some(url("https://k1nd.ltd"))
 
-scalaVersion in ThisBuild := "2.12.4"
+scalaVersion in ThisBuild := scala212
 
 lazy val pets = (project in file("."))
   .aggregate(bones, dog)
@@ -22,7 +22,8 @@ lazy val dog = project.settings(
   scalaSettings,
   libraryDependencies ++= Seq(
     "org.typelevel" %% "cats-core" % "1.0.1",
-    "org.typelevel" %% "cats-effect" % "0.10"
+    "org.typelevel" %% "cats-effect" % "0.10",
+    "org.typelevel" %% "machinist" % "0.6.4"
   ),
   addCompilerPlugin("org.spire-math" % "kind-projector" % "0.9.6" cross CrossVersion.binary),
   libraryDependencies ++= (scalaBinaryVersion.value match {
@@ -31,50 +32,6 @@ lazy val dog = project.settings(
     case _ =>
       Nil
   })
-)
-
-lazy val scala210 = "2.10.7"
-lazy val scala211 = "2.11.12"
-lazy val scala212 = "2.12.5"
-
-lazy val scalaSettings = Seq(
-  scalaVersion := scala212,
-  crossScalaVersions := Seq(scala210, scala211, scala212),
-  libraryDependencies ++= Seq(
-    "org.scalatest" %% "scalatest" % "3.0.5",
-    "org.scalactic" %% "scalactic" % "3.0.5",
-    "org.scalacheck" %% "scalacheck" % "1.14.0",
-    "org.scalamock" %% "scalamock" % "4.1.0"
-  ).map(_ % Test),
-  scalacOptions ++= Seq(
-    "-deprecation",
-    "-encoding",
-    "UTF-8",
-    "-target:jvm-1.8",
-    "-feature",
-    "-language:existentials",
-    "-language:higherKinds",
-    "-language:implicitConversions",
-    "-language:postfixOps",
-    "-unchecked",
-    "-Xfatal-warnings",
-    "-Xlint",
-    "-Yno-adapted-args",
-    "-Ywarn-dead-code",
-    "-Ywarn-numeric-widen",
-    "-Ywarn-value-discard",
-    "-Xfuture",
-    "-Ywarn-unused-import",
-    "-Ywarn-unused"
-  ).filter {
-    case "-Ywarn-unused-import" if scalaVersion.value startsWith "2.10" => false
-    case "-Ywarn-unused" if !(scalaVersion.value startsWith "2.12")     => false
-    case _                                                              => true
-  },
-  scalacOptions in (Compile, console) --= Seq("-Xlint",
-                                              "-Ywarn-unused",
-                                              "-Ywarn-unused-import"),
-  scalacOptions in (Test, console) := (scalacOptions in (Compile, console)).value
 )
 
 compile in Compile := (compile in Compile).dependsOn(dependencyUpdates).value
