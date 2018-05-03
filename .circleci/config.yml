@@ -41,6 +41,11 @@ load_workspace: &load_workspace
   attach_workspace:
     at: .
 
+tut_and_commit: &tut_and_commit
+  run:
+    name: Run tut and then commit any changes
+    command: (sbt tut && git diff --exit-code --name-only README.md) || echo "readme changed"
+
 # ---------------------------------------------------------------------------
 # JOB DEFINITIONS
 # ---------------------------------------------------------------------------
