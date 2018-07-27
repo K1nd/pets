@@ -11,7 +11,8 @@ object Release extends AutoPlugin {
 
     implicit class ReleaseOps(val proj: Project) extends AnyVal {
       def withReleaseSettings: Project = proj.settings(
-        releaseSettings
+        releaseSettings,
+        releaseTagName := s"${version.value}"
       )
     }
 
@@ -22,18 +23,15 @@ object Release extends AutoPlugin {
     releaseCrossBuild := true,
     releaseTagComment := s"Releasing ${(version).value} [ci skip]",
     releaseCommitMessage := s"Setting version to ${(version).value} [ci skip]",
+    releaseVersionFile := new sbt.File("/dev/null"),
 
     releaseProcess := Seq[ReleaseStep](
-      checkSnapshotDependencies,
       inquireVersions,
       runClean,
       runTest,
       setReleaseVersion,
-      commitReleaseVersion,
       tagRelease,
       publishArtifacts,
-      setNextVersion,
-      commitNextVersion,
       releaseStepCommand("sonatypeReleaseAll"),
       pushChanges
     ),

@@ -1,14 +1,42 @@
+import com.typesafe.sbt.{GitBranchPrompt, GitVersioning}
 import sbt._
 import sbt.Keys._
+import sbtrelease.Version
+import sbtrelease.Version.Bump
+import com.typesafe.sbt.SbtGit.git
 
 object ScalaSettings extends AutoPlugin {
   object autoImport {
     implicit class SettingsOps(val proj: Project) extends AnyVal{
       def withCommonSettings: Project = proj.settings(
-        commonSettings
-      )
+        commonSettings,
+        gitVersionMatcher,
+        GitVersioning
+      ).enablePlugins(GitBranchPrompt)
     }
   }
+
+  lazy val gitVersionMatcher = Seq(
+    git.useGitDescribe := true,
+    git.gitTagToVersionNumber := { tag =>
+
+      def calculateBump(msg: String): Bump = msg.toUpperCase match {
+        case major if major.contains("|BREAKING") => Bump.Major
+        case feature if feature.contains("|FEATURE") => Bump.Minor
+        case _ => Bump.Bugfix
+      }
+
+      for{
+        tagStr <- Option(tag.takeWhile(_ != '-')).filter(_.length > 0)
+        headCommitMessage = git.gitHeadMessage.value.getOrElse("")
+        bump = calculateBump(headCommitMessage)
+        suffix = git.gitCurrentTags.value.find(_ == tag).map(_ => "").getOrElse("-SNAPSHOT")
+        version <- Version(tagStr)
+      } yield version.bump(bump).string + suffix
+    }
+  )
+
+  git.uncommittedSignifier := None
 
   lazy val scala210 = "2.10.7"
   lazy val scala211 = "2.11.12"
