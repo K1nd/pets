@@ -1,10 +1,9 @@
 import com.timushev.sbt.updates.UpdatesKeys.dependencyUpdates
 import com.timushev.sbt.updates.UpdatesPlugin.autoImport.dependencyUpdatesFailBuild
 import com.typesafe.sbt.GitBranchPrompt
+import com.typesafe.sbt.SbtGit.GitKeys
 import sbt._
 import sbt.Keys._
-
-import scala.sys.process.Process
 
 object ScalaSettings extends AutoPlugin {
   object autoImport {
@@ -25,8 +24,8 @@ object ScalaSettings extends AutoPlugin {
     organization := "ltd.k1nd",
     organizationName := "KIND Consulting Ltd.",
     organizationHomepage := Some(url("https://k1nd.ltd")),
-    gitBranch := Process("git rev-parse --abbrev-ref HEAD").lineStream.head,
-    dependencyUpdatesFailBuild := gitBranch.value != "master",
+    dependencyUpdatesFailBuild := GitKeys.gitReader.value
+      .withGit(_.branch) != "master",
     compile in Compile := (compile in Compile)
       .dependsOn(dependencyUpdates)
       .value,
@@ -50,6 +49,4 @@ object ScalaSettings extends AutoPlugin {
       "-language:implicitConversions" // Allow definition of implicit functions called views
     )
   )
-
-  private val gitBranch = settingKey[String]("Determines current git branch")
 }
