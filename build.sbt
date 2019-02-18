@@ -9,7 +9,14 @@ lazy val pets = (project in file("."))
 
 lazy val bones = project
   .settings(
-    name := "pets-bones"
+    name := "pets-bones",
+    libraryDependencies ++= Seq(
+      "com.chuusai" %% "shapeless" % "2.3.3",
+      "org.typelevel" %% "cats-effect" % "1.2.0",
+      "org.typelevel" %% "cats-mtl-core" % "0.5.0",
+      "com.lihaoyi" %% "sourcecode" % "0.1.5",
+      "org.slf4j" % "slf4j-api" % "1.7.25"
+    )
   )
   .withCommonSettings
   .withReleaseSettings

@@ -4,6 +4,19 @@
 
 Helpers for cats &amp; co.
 
+
+### Bones
+
+Bones is a great cat as well as a thin wrapper for slf4j.
+
+#### SetOps
+##### doesNotContain
+This simply checks for the non-existance of an element in a set.
+```tut:reset
+import ltd.k1nd.pets.bones.syntax.SetOps._
+Set(1,2,3).doesNotContain(4)
+```
+
 ### Dog
 
 #### SyncOps
@@ -86,15 +99,4 @@ import cats.Id
 
 Option(123).toOptionT[Id]
 None.toOptionT[Id]
-```
-
-
-### Bones
-
-#### SetOps
-##### doesNotContain
-This simply checks for the non-existance of an element in a set.
-```tut:reset
-import ltd.k1nd.pets.bones.syntax.SetOps._
-Set(1,2,3).doesNotContain(4)
 ```
