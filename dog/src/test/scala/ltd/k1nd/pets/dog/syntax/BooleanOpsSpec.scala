@@ -1,6 +1,5 @@
 package ltd.k1nd.pets.dog.syntax
 
-
 import cats.Id
 import cats.implicits.catsStdInstancesForEither
 import java.util.concurrent.atomic.AtomicBoolean

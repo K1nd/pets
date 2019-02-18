@@ -34,5 +34,3 @@ lazy val dog = project
   .withReleaseSettings
 
 git.uncommittedSignifier := None
-
-

@@ -11,6 +11,6 @@ trait SyncOps {
 
 object SyncOps {
   implicit final class SyncSyntax[T](val lhs: T) extends AnyVal {
-    def delay[F[_] : Sync]: F[T] = macro DefaultOps.unopWithEv[Sync[F], F[T]]
+    def delay[F[_]: Sync]: F[T] = macro DefaultOps.unopWithEv[Sync[F], F[T]]
   }
 }
