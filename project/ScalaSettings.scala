@@ -1,5 +1,6 @@
 import com.timushev.sbt.updates.UpdatesKeys.dependencyUpdates
 import com.timushev.sbt.updates.UpdatesPlugin.autoImport.dependencyUpdatesFailBuild
+import com.typesafe.sbt.GitBranchPrompt
 import sbt._
 import sbt.Keys._
 
@@ -8,9 +9,12 @@ import scala.sys.process.Process
 object ScalaSettings extends AutoPlugin {
   object autoImport {
     implicit class SettingsOps(val proj: Project) extends AnyVal {
-      def withCommonSettings: Project = proj.settings(
-        commonSettings
-      )
+      def withCommonSettings: Project =
+        proj
+          .settings(
+            commonSettings
+          )
+          .enablePlugins(GitBranchPrompt)
     }
   }
 
