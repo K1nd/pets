@@ -18,9 +18,9 @@ lazy val dog = project
   .settings(
     name := "pets-dog",
     libraryDependencies ++= Seq(
-      "org.typelevel" %% "cats-core" % "1.0.1",
-      "org.typelevel" %% "cats-effect" % "0.10",
-      "org.typelevel" %% "machinist" % "0.6.4"
+      "org.typelevel" %% "cats-core" % "1.6.0",
+      "org.typelevel" %% "cats-effect" % "1.2.0",
+      "org.typelevel" %% "machinist" % "0.6.6"
     )
   )
   .withCommonSettings
