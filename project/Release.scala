@@ -19,10 +19,8 @@ object Release extends AutoPlugin {
 
   lazy val releaseSettings = Seq(
     releasePublishArtifactsAction := PgpKeys.publishSigned.value,
-    releaseCrossBuild := true,
     releaseTagComment := s"Releasing ${(version).value} [ci skip]",
     releaseCommitMessage := s"Setting version to ${(version).value} [ci skip]",
-
     releaseProcess := Seq[ReleaseStep](
       checkSnapshotDependencies,
       inquireVersions,
@@ -37,7 +35,6 @@ object Release extends AutoPlugin {
       releaseStepCommand("sonatypeReleaseAll"),
       pushChanges
     ),
-
     publishTo := sonatypePublishTo.value
   )
 }
