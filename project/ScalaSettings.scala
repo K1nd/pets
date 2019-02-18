@@ -1,9 +1,13 @@
 import com.timushev.sbt.updates.UpdatesKeys.dependencyUpdates
 import com.timushev.sbt.updates.UpdatesPlugin.autoImport.dependencyUpdatesFailBuild
-import com.typesafe.sbt.GitBranchPrompt
+import com.typesafe.sbt.GitPlugin.autoImport.git
+import com.typesafe.sbt.{GitBranchPrompt, GitVersioning}
 import com.typesafe.sbt.SbtGit.GitKeys
 import sbt._
 import sbt.Keys._
+import sbtrelease.ReleasePlugin.autoImport.{releaseTagName, releaseVersionFile}
+import sbtrelease.Version
+import sbtrelease.Version.Bump
 
 object ScalaSettings extends AutoPlugin {
   object autoImport {
@@ -11,9 +15,10 @@ object ScalaSettings extends AutoPlugin {
       def withCommonSettings: Project =
         proj
           .settings(
-            commonSettings
+            commonSettings,
+            gitVersionMatcher
           )
-          .enablePlugins(GitBranchPrompt)
+          .enablePlugins(GitBranchPrompt, GitVersioning)
     }
   }
 
@@ -49,4 +54,33 @@ object ScalaSettings extends AutoPlugin {
       "-language:implicitConversions" // Allow definition of implicit functions called views
     )
   )
+
+  lazy val gitVersionMatcher = Seq(
+    git.useGitDescribe := true,
+    releaseVersionFile := new sbt.File("/dev/null"),
+    releaseTagName := s"v${(version in ThisBuild).value}",
+    git.gitTagToVersionNumber := { tag =>
+      def calculateBump(msg: String): Bump = msg.toUpperCase match {
+        case major if major.contains("|BREAKING")    => Bump.Major
+        case feature if feature.contains("|FEATURE") => Bump.Minor
+        case _                                       => Bump.Bugfix
+      }
+
+      for {
+        tagStr <- Option(tag) collect {
+          case VersionRegex(versionStr) => versionStr
+        }
+        headCommitMessage = git.gitHeadMessage.value.getOrElse("")
+        bump = calculateBump(headCommitMessage)
+        suffix = git.gitCurrentTags.value
+          .find(_ == tag)
+          .map(_ => "")
+          .getOrElse("-SNAPSHOT")
+        version <- Version(tagStr)
+        bumped = version.bump(bump).string
+      } yield s"$bumped$suffix"
+    }
+  )
+
+  lazy val VersionRegex = "v?([0-9][0-9\\.]*).*".r
 }
