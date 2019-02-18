@@ -4,6 +4,25 @@
 
 Helpers for cats &amp; co.
 
+
+### Bones
+
+Bones is a great cat as well as a thin wrapper for slf4j.
+
+#### Example use
+```scala
+import cats.implicits._
+import cats.mtl.implicits._
+import cats.effect.IO
+import cats.data.ReaderT
+import ltd.k1nd.pets.bones.log.MdcLogger
+
+case class Context(name: String, age: Int)
+type MyReader[T] = ReaderT[IO, Context, T]
+val logger = MdcLogger[IO, MyReader, Context](getClass).unsafeRunSync()
+logger.info("This is a log - wow!").run(Context("Elias", 27)).unsafeRunSync()
+```
+
 ### Dog
 
 #### SyncOps
@@ -17,7 +36,7 @@ scala> import cats.effect.IO
 import cats.effect.IO
 
 scala> val suspended = println("hey friend").delay[IO]
-suspended: cats.effect.IO[Unit] = IO$158863444
+suspended: cats.effect.IO[Unit] = IO$193861395
 
 scala> suspended.unsafeRunSync()
 hey friend
@@ -109,7 +128,7 @@ scala> import scala.concurrent.Future
 import scala.concurrent.Future
 
 scala> Future.successful(123).toIO
-res0: cats.effect.IO[Int] = IO$1643403756
+res0: cats.effect.IO[Int] = IO$2045424119
 ```
 
 #### OptionOps
@@ -127,18 +146,4 @@ res0: cats.data.OptionT[cats.Id,Int] = OptionT(Some(123))
 
 scala> None.toOptionT[Id]
 res1: cats.data.OptionT[cats.Id,Nothing] = OptionT(None)
-```
-
-
-### Bones
-
-#### SetOps
-##### doesNotContain
-This simply checks for the non-existance of an element in a set.
-```scala
-scala> import ltd.k1nd.pets.bones.syntax.SetOps._
-import ltd.k1nd.pets.bones.syntax.SetOps._
-
-scala> Set(1,2,3).doesNotContain(4)
-res0: Boolean = true
 ```

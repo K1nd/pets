@@ -32,9 +32,10 @@ class ContainerOpsSpec extends WordSpec with Matchers {
   "transform" should {
     "allow you to use a natural transformation in scope to transform one effect into another" in {
 
-      implicit def fk[F[_]: Functor]: F ~> OptionT[F, ?] = new FunctionK[F, OptionT[F, ?]] {
-        override def apply[A](fa: F[A]): OptionT[F, A] = OptionT.liftF(fa)
-      }
+      implicit def fk[F[_]: Functor]: F ~> OptionT[F, ?] =
+        new FunctionK[F, OptionT[F, ?]] {
+          override def apply[A](fa: F[A]): OptionT[F, A] = OptionT.liftF(fa)
+        }
 
       val funky = List(123)
       val lifted: OptionT[List, Int] = funky.transform
