@@ -9,12 +9,18 @@ Helpers for cats &amp; co.
 
 Bones is a great cat as well as a thin wrapper for slf4j.
 
-#### SetOps
-##### doesNotContain
-This simply checks for the non-existance of an element in a set.
+#### Example use
 ```tut:reset
-import ltd.k1nd.pets.bones.syntax.SetOps._
-Set(1,2,3).doesNotContain(4)
+import cats.implicits._
+import cats.mtl.implicits._
+import cats.effect.IO
+import cats.data.ReaderT
+import ltd.k1nd.pets.bones.log.MdcLogger
+
+case class Context(name: String, age: Int)
+type MyReader[T] = ReaderT[IO, Context, T]
+val logger = MdcLogger[IO, MyReader, Context](getClass).unsafeRunSync()
+logger.info("This is a log - wow!").run(Context("Elias", 27)).unsafeRunSync()
 ```
 
 ### Dog
