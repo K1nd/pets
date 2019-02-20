@@ -1,13 +1,18 @@
 # pets
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/06b2e35106d847d994cff35bac230211)](https://app.codacy.com/app/wunderk1nd-e/pets?utm_source=github.com&utm_medium=referral&utm_content=K1nd/pets&utm_campaign=badger) [![CircleCI](https://circleci.com/gh/K1nd/pets.svg?style=shield)](https://circleci.com/gh/K1nd/pets) [![Coverage Status](https://coveralls.io/repos/github/K1nd/pets/badge.svg?branch=master)](https://coveralls.io/github/K1nd/pets?branch=master)
+[![Latest version](https://index.scala-lang.org/k1nd/pets/pets/latest.svg)](https://index.scala-lang.org/k1nd/pets/pets) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/06b2e35106d847d994cff35bac230211)](https://app.codacy.com/app/wunderk1nd-e/pets?utm_source=github.com&utm_medium=referral&utm_content=K1nd/pets&utm_campaign=badger) [![CircleCI](https://circleci.com/gh/K1nd/pets.svg?style=shield)](https://circleci.com/gh/K1nd/pets) [![Coverage Status](https://coveralls.io/repos/github/K1nd/pets/badge.svg?branch=master)](https://coveralls.io/github/K1nd/pets?branch=master)
 
 Helpers for cats &amp; co.
 
 
 ### Bones
 
-Bones is a great cat as well as a thin wrapper for slf4j.
+Bones is a great cat as well as a pure tagless final wrapper for slf4j.
+You should use Bones because:
+* It allows you to separate out the orthogonal concern of carrying a logging context without relying on mutable global state
+* It supports strongly typed logging contexts that are transformed into independent values in the `MDC`
+    * e.g. `case class A(b: String)`, `case class C(d: A)` with `C(A("hi!"))` would be set in the `MDC` as `d.b -> "hi!"`
+* It uses Li Haoyi's `sourcecode` to add the full name of the nearest enclosing definition where the logger was invoked to the MDC as the key `CodeLocation`
 
 #### Example use
 ```scala
@@ -36,7 +41,7 @@ scala> import cats.effect.IO
 import cats.effect.IO
 
 scala> val suspended = println("hey friend").delay[IO]
-suspended: cats.effect.IO[Unit] = IO$193861395
+suspended: cats.effect.IO[Unit] = IO$305606396
 
 scala> suspended.unsafeRunSync()
 hey friend
@@ -128,7 +133,7 @@ scala> import scala.concurrent.Future
 import scala.concurrent.Future
 
 scala> Future.successful(123).toIO
-res0: cats.effect.IO[Int] = IO$2045424119
+res0: cats.effect.IO[Int] = IO$147326788
 ```
 
 #### OptionOps
