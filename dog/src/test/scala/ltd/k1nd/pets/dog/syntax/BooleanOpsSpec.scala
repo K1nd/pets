@@ -3,12 +3,12 @@ package ltd.k1nd.pets.dog.syntax
 import cats.Id
 import cats.implicits.catsStdInstancesForEither
 import java.util.concurrent.atomic.AtomicBoolean
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
+import org.scalatestplus.scalacheck.ScalaCheckDrivenPropertyChecks
 import org.scalatest.{EitherValues, Matchers, WordSpec}
 
 class BooleanOpsSpec
     extends WordSpec
-    with GeneratorDrivenPropertyChecks
+    with ScalaCheckDrivenPropertyChecks
     with Matchers
     with EitherValues {
 

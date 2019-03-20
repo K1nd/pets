@@ -43,7 +43,6 @@ class ContainerOpsSpec extends WordSpec with Matchers {
       val expected = List(Option(123))
 
       lifted.value should equal(expected)
-      pending
     }
   }
 }

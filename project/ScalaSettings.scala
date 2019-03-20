@@ -22,7 +22,7 @@ object ScalaSettings extends AutoPlugin {
     }
   }
 
-  lazy val scalatestVersion = "3.0.5"
+  lazy val scalatestVersion = "3.0.7"
 
   lazy val commonSettings = Seq(
     scalaVersion := "2.12.8",

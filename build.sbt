@@ -15,7 +15,7 @@ lazy val bones = project
       "org.typelevel" %% "cats-effect" % "1.2.0",
       "org.typelevel" %% "cats-mtl-core" % "0.5.0",
       "com.lihaoyi" %% "sourcecode" % "0.1.5",
-      "org.slf4j" % "slf4j-api" % "1.7.25"
+      "org.slf4j" % "slf4j-api" % "1.7.26"
     )
   )
   .withCommonSettings

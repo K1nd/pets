@@ -41,7 +41,6 @@ object MdcLogger {
         override def trace(msg: F[String])(implicit path: Enclosing): F[Unit] =
           for {
             traceEnabled <- Sync[F].delay(underlyingLogger.isTraceEnabled())
-            _ = ApplicativeAsk[F, Ctx].ask
             logF = setMdc *> msg.flatMap(m =>
               Sync[F].delay(underlyingLogger.trace(m)))
             _ <- logF.whenA(traceEnabled)
